@@ -1,34 +1,32 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { SplashScreen, Stack } from 'expo-router';
-import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { Ionicons } from "@expo/vector-icons/";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import { SplashScreen, Stack } from "expo-router";
+import { useState, useEffect } from "react";
+import appContext from "../services/appContext";
+import { useColorScheme } from "react-native";
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
+export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
+  initialRouteName: "(tabs)",
 };
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    ...FontAwesome.font,
+    ...Ionicons.font,
   });
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
   }, [error]);
 
   return (
     <>
-      {/* Keep the splash screen open until the assets have loaded. In the future, we should just support async font loading with a native version of font-display. */}
       {!loaded && <SplashScreen />}
       {loaded && <RootLayoutNav />}
     </>
@@ -36,16 +34,41 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+  const [theme, setTheme] = useState(
+    useColorScheme() === "light" ? "light" : "dark"
+  );
 
   return (
-    <>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <appContext.Provider value={{ theme: { theme, setTheme } }}>
+      <ThemeProvider value={theme === "light" ? DefaultTheme : DarkTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+          <Stack.Screen
+            name="importWallet"
+            options={{ presentation: "modal", title: "Import Wallet" }}
+          />
+          <Stack.Screen
+            name="passwordWallet"
+            options={{ presentation: "modal", title: "Change Password" }}
+          />
+          <Stack.Screen
+            name="unlockWallet"
+            options={{ presentation: "modal", title: "Unlock Wallet" }}
+          />
+          <Stack.Screen
+            name="lockWallet"
+            options={{ presentation: "modal", title: "Lock Wallet" }}
+          />
+          <Stack.Screen
+            name="viewWallet"
+            options={{ presentation: "modal", title: "View Wallet" }}
+          />
+          <Stack.Screen
+            name="deleteWallet"
+            options={{ presentation: "modal", title: "Delete Wallet" }}
+          />
         </Stack>
       </ThemeProvider>
-    </>
+    </appContext.Provider>
   );
 }

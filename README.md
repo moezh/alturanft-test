@@ -2,6 +2,12 @@
 
 A simple mobile app that allows users to input a twelve- word recovery seed, derive and store their private key, and view their ETH balance and address. The app is designed using React Native and TypeScript, and works on both iOS and Android devices.
 
+## Getting Started
+
+### `npm install`
+
+Download and install all the required dependencies.
+
 ## Available Scripts
 
 ### `npm start`

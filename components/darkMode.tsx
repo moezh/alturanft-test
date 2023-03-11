@@ -1,38 +1,26 @@
-import { Ionicons } from "@expo/vector-icons/";
-import { Pressable } from "react-native";
-
 import { useContext } from "react";
+import { Text, View } from "react-native";
+import { Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons/";
+
 import appContext from "../services/appContext";
 import useStyles from "../styles/styles";
-import { Text, View } from "react-native";
 
-export default function DarkMode({ showText = false }) {
-  const context = useContext(appContext);
+export default function DarkMode() {
+  const { theme, setTheme } = useContext(appContext);
   const styles = useStyles();
 
   return (
-    <Pressable
-      onPress={() =>
-        context?.theme?.setTheme(
-          context?.theme?.theme === "light" ? "dark" : "light"
-        )
-      }
-    >
-      <View style={[styles.containerRow, { marginHorizontal: 16 }]}>
+    <Pressable onPress={() => setTheme(theme === "light" ? "dark" : "light")}>
+      <View style={styles.containerRow}>
         <Ionicons
           size={26}
-          name={
-            context?.theme?.theme === "light"
-              ? "ios-moon-outline"
-              : "ios-sunny-outline"
-          }
+          name={theme === "light" ? "ios-moon-outline" : "ios-sunny-outline"}
           color={styles.text.color}
         />
-        {showText ? (
-          <Text style={[styles.text, { marginLeft: 12 }]}>{`${
-            context?.theme?.theme === "light" ? "Dark" : "Light"
-          } Mode`}</Text>
-        ) : null}
+        <Text style={[styles.text, { marginLeft: 12 }]}>
+          {`${theme === "light" ? "Dark" : "Light"} Mode`}
+        </Text>
       </View>
     </Pressable>
   );

@@ -1,14 +1,14 @@
-import { Ionicons } from "@expo/vector-icons/";
+import { useState, useEffect } from "react";
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
-import { useState, useEffect } from "react";
+import { useFonts } from "expo-font";
+import { Ionicons } from "@expo/vector-icons/";
+
 import appContext from "../services/appContext";
-import { useColorScheme } from "react-native";
 
 export { ErrorBoundary } from "expo-router";
 
@@ -34,39 +34,22 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const [theme, setTheme] = useState(
-    useColorScheme() === "light" ? "light" : "dark"
-  );
+  const [theme, setTheme] = useState("light");
+  const [wallet, setWallet] = useState({
+    address: "",
+    balance: "",
+  });
 
   return (
-    <appContext.Provider value={{ theme: { theme, setTheme } }}>
+    <appContext.Provider value={{ theme, setTheme, wallet, setWallet }}>
       <ThemeProvider value={theme === "light" ? DefaultTheme : DarkTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen
             name="importWallet"
-            options={{ presentation: "modal", title: "Import Wallet" }}
+            options={{ title: "Import Wallet" }}
           />
-          <Stack.Screen
-            name="passwordWallet"
-            options={{ presentation: "modal", title: "Change Password" }}
-          />
-          <Stack.Screen
-            name="unlockWallet"
-            options={{ presentation: "modal", title: "Unlock Wallet" }}
-          />
-          <Stack.Screen
-            name="lockWallet"
-            options={{ presentation: "modal", title: "Lock Wallet" }}
-          />
-          <Stack.Screen
-            name="viewWallet"
-            options={{ presentation: "modal", title: "View Wallet" }}
-          />
-          <Stack.Screen
-            name="deleteWallet"
-            options={{ presentation: "modal", title: "Delete Wallet" }}
-          />
+          <Stack.Screen name="viewWallet" options={{ title: "View Wallet" }} />
         </Stack>
       </ThemeProvider>
     </appContext.Provider>

@@ -9,13 +9,7 @@ const getStyles = (theme: Theme) =>
       alignItems: "center",
       justifyContent: "center",
       backgroundColor: theme.colors.background,
-    },
-    contentContainer: {
-      flex: 1,
-      alignItems: "center",
-      justifyContent: "flex-start",
-      backgroundColor: theme.colors.background,
-      paddingVertical: 50,
+      paddingHorizontal: 16,
     },
     containerCol: {
       flexDirection: "column",
@@ -31,28 +25,60 @@ const getStyles = (theme: Theme) =>
       fontSize: 20,
       fontWeight: "bold",
       color: theme.colors.text,
+      marginTop: 12,
+      textTransform: "capitalize",
     },
     text: {
       fontSize: 17,
-      lineHeight: 24,
       color: theme.colors.text,
+      marginTop: 12,
     },
-    link: {
-      marginTop: 15,
-      paddingVertical: 15,
+    error: {
+      fontSize: 14,
+      color: "darkred",
+      textTransform: "capitalize",
+      marginTop: 12,
+    },
+    message: {
+      fontSize: 14,
+      color: "darkgreen",
+      textTransform: "capitalize",
+      marginTop: 12,
     },
     linkText: {
       fontSize: 14,
       color: theme.colors.primary,
+      marginTop: 12,
     },
     separator: {
-      marginVertical: 30,
+      marginVertical: 24,
       height: 1,
       width: "80%",
       backgroundColor: theme.colors.border,
     },
-    padding: {
-      padding: 4,
+    space: {
+      marginVertical: 24,
+    },
+    input: {
+      width: "80%",
+      marginVertical: 24,
+      backgroundColor: theme.colors.border,
+      color: theme.colors.text,
+      borderRadius: 10,
+      paddingVertical: 10,
+      paddingHorizontal: 12,
+    },
+    button: {
+      backgroundColor: theme.colors.text,
+      borderRadius: 10,
+      paddingVertical: 10,
+      paddingHorizontal: 12,
+    },
+    buttonText: {
+      fontSize: 17,
+      color: theme.colors.background,
+      alignSelf: "center",
+      paddingHorizontal: 12,
     },
   });
 

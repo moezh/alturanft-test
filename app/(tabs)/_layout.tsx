@@ -1,6 +1,6 @@
-import { Ionicons } from "@expo/vector-icons/";
 import { Tabs } from "expo-router";
-import DarkMode from "../../components/darkMode";
+import { Ionicons } from "@expo/vector-icons/";
+
 import useStyles from "../../styles/styles";
 
 export default function TabLayout() {
@@ -23,7 +23,6 @@ export default function TabLayout() {
               color={color}
             />
           ),
-          headerRight: () => <DarkMode />,
         }}
       />
       <Tabs.Screen
@@ -38,7 +37,6 @@ export default function TabLayout() {
               color={color}
             />
           ),
-          headerRight: () => <DarkMode />,
         }}
       />
     </Tabs>
